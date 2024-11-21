@@ -1,7 +1,7 @@
 import random
 
-def get_random_number_between_one_and_six():
-    return random.randint(1, 6)
+def print_random_number_between_one_and_six():
+    print("Your number is: " + str(random.randint(1, 6)))
 
 def generate_fibonacci(limit):
     a, b = 0, 1
@@ -44,17 +44,24 @@ def chatting_with_ada():
     else:
         print(f"Can you turn on the computer? It's success, {name}!!!")
 
+    commands = {
+        "1":("Roll", print_random_number_between_one_and_six),
+        "2":("Guess", play_guessing_game),
+        "3":("Fibonacci", lambda: generate_fibonacci(100000)),
+        "4":("Exit", lambda: print("Goodbye!"))
+    }
+
     while True:
-        action = input(f"\nWhat would you like to do next, {name}? \n1.roll; \n2.guess; \n3.fibonacci; \n4.exit.\nWrite please the number for the option: ")
-        if action == "1":
-            print(f"You rolled a {get_random_number_between_one_and_six()}!")
-        elif action == "2":
-            play_guessing_game()
-        elif action == "3":
-            generate_fibonacci(100000)
-            print("\n")
-        elif action == "4":
-            print(f"Goodbye, {name}! See you soon! (Hope no)")
-            break
+        print(f"\nWhat would you like to do next, {name}?")
+        for key, (description) in commands.items():
+            print(f"{key}: {description}")
+        action = input("Write the number for the option: ").strip()
+        if action in commands:
+            description, func = commands[action]
+            func()
+            if description == "Exit":
+                break
+        else:
+            print("Invalid choice. Please try again.")
 
 chatting_with_ada()
