@@ -1,5 +1,13 @@
 import random
 
+def get_integer_input (message: str) -> int:
+    while True:
+        try:
+            return int(input(message))
+        except ValueError:
+            print("Please enter an integer")
+
+
 def print_random_number_between_one_and_six():
     print("Your number is: " + str(random.randint(1, 6)))
 
@@ -32,7 +40,7 @@ def chatting_with_ada():
     name = input("What's your name? ")
     print(f"The name is stupid, but ok, {name}!")
 
-    age = int(input(f"{name}, how old are you? "))
+    age = get_integer_input(f"{name}, how old are you? ")
     if age < 18:
         print(f"You're still a baby, {name}")
     elif age < 25:
@@ -45,17 +53,17 @@ def chatting_with_ada():
         print(f"Can you turn on the computer? It's success, {name}!!!")
 
     commands = {
-        "1":("Roll", print_random_number_between_one_and_six),
-        "2":("Guess", play_guessing_game),
-        "3":("Fibonacci", lambda: generate_fibonacci(100000)),
-        "4":("Exit", lambda: print("Goodbye!"))
+        1 : ("Roll", print_random_number_between_one_and_six),
+        2 : ("Guess", play_guessing_game),
+        3 : ("Fibonacci", lambda: generate_fibonacci(100000)),
+        4 : ("Exit", lambda: print("Goodbye!"))
     }
 
     while True:
         print(f"\nWhat would you like to do next, {name}?")
         for key, (description) in commands.items():
             print(f"{key}: {description}")
-        action = input("Write the number for the option: ").strip()
+        action = get_integer_input("Write the number for the option: ")
         if action in commands:
             description, func = commands[action]
             func()
