@@ -1,4 +1,5 @@
 import random
+import webbrowser
 
 def get_integer_input (message: str) -> int:
     while True:
@@ -35,6 +36,10 @@ def play_guessing_game():
 
     print(f"Game over! The number was: {secret_number}")
 
+def search_in_browser():
+    input_message = input("Enter your search query: ")
+    webbrowser.open(f"https://www.google.com/search?q={input_message}")
+
 def chatting_with_ada():
     print("Hello! I'm Ada, your virtual girlfriend.")
     name = input("What's your name? ")
@@ -56,7 +61,8 @@ def chatting_with_ada():
         1 : ("Roll", print_random_number_between_one_and_six),
         2 : ("Guess", play_guessing_game),
         3 : ("Fibonacci", lambda: generate_fibonacci(100000)),
-        4 : ("Exit", lambda: print("Goodbye!"))
+        4 : ("Open the Google Page", search_in_browser),
+        5 : ("Exit", lambda: print("Goodbye!"))
     }
 
     while True:
