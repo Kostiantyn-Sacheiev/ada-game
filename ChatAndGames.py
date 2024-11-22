@@ -3,16 +3,11 @@ import webbrowser
 import time
 import threading
 
-def get_integer_input (message: str) -> int:
-    while True:
-        try:
-            return int(input(message))
-        except ValueError:
-            print("Please enter an integer")
-
+from Classes.Controllers.TurtleController import TurtleController
+from utils.utils import get_integer_input, get_float_input
 
 def print_random_number_between_one_and_six():
-    print("Your number is: " + str(random.randint(1, 6)))
+    print("\nYour number is: " + str(random.randint(1, 6)))
 
 def generate_fibonacci(limit):
     a, b = 0, 1
@@ -96,6 +91,23 @@ def ask_questions():
         for question, answer in skipped:
             print(f"{question} (Correct answer: {answer})")
 
+
+def manage_work_day():
+    total_work_time = get_integer_input("Enter total work time in hours: ") * 60
+    session_duration = get_integer_input("Enter session duration in minutes: ")
+    break_duration = get_float_input("Enter break duration in minutes: ")
+    total_sessions = total_work_time // (session_duration + break_duration)
+    print(f"Your work program starts. You will be reminded to take a break every {session_duration} minutes.")
+
+    for session in range(1, int(total_sessions) + 1):
+        print(f"Session {session} begins. Work for {session_duration} minutes...")
+        time.sleep(session_duration * 60)
+        print(f"Break {session} begins. Hear {break_duration} minutes break with music!")
+        webbrowser.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+        time.sleep(int(break_duration * 60))
+
+    print("Your workday is over. Well done!")
+
 def chatting_with_ada():
     print("Hello! I'm Ada, your virtual girlfriend.")
     name = input("What's your name? ")
@@ -113,13 +125,17 @@ def chatting_with_ada():
     else:
         print(f"Can you turn on the computer? It's success, {name}!!!")
 
+    turtle_controller = TurtleController()
+
     commands = {
         1 : ("Roll", print_random_number_between_one_and_six),
         2 : ("Guess", play_guessing_game),
         3 : ("Fibonacci", lambda: generate_fibonacci(100000)),
         4 : ("Open the Google Page", search_in_browser),
         5 : ("Get 10 questions", ask_questions),
-        6 : ("Exit", lambda: print("Goodbye!"))
+        6 : ("Manage workday", manage_work_day),
+        7 : ("Draw", turtle_controller.start_turtle),
+        8 : ("Exit", lambda: print("Goodbye!"))
     }
 
     while True:
