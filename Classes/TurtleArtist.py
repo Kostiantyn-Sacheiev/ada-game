@@ -13,23 +13,22 @@ class TurtleArtist:
         self.turtle.forward(distance)
 
     def move_up(self, distance=100):
-        self.turtle.setheading(90)  # Угол 90 градусов — вверх
+        self.turtle.setheading(90)  
         self.turtle.forward(distance)
 
     def move_down(self, distance=100):
-        self.turtle.setheading(270)  # Угол 270 градусов — вниз
+        self.turtle.setheading(270) 
         self.turtle.forward(distance)
 
     def move_left(self, distance=100):
-        self.turtle.setheading(180)  # Угол 180 градусов — влево
+        self.turtle.setheading(180)  
         self.turtle.forward(distance)
 
     def move_right(self, distance=100):
-        self.turtle.setheading(0)  # Угол 0 градусов — вправо
+        self.turtle.setheading(0)  
         self.turtle.forward(distance)
 
     def draw_ada(self):
-        # Код метода draw_ada остаётся без изменений
         self.turtle.penup()
         self.turtle.goto(-200, 0)
         self.turtle.setheading(0)
